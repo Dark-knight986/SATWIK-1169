@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Response Display</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Response Display</title>
 </head>
-
 <body>
-    <h1>Request</h1>
-    <pre id="request"></pre>
+  <h1>Request</h1>
+  <pre id="request"></pre>
 
-    <h1>Response</h1>
-    <pre id="response"></pre>
+  <h1>Response</h1>
+  <pre id="response"></pre>
 
-    <script>
-        // Fetch request and display response
-        fetch('/bfhl', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "data": ["a", "1", "334", "4", "R"]
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('request').innerText = JSON.stringify(data, null, 2);
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
+  <script>
+    // Fetch request and display response
+    fetch('/bfhl', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "data": ["a","1","334","4","R"]
+      })
+    })
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('response').innerText = data;
+    })
+    .catch(error => console.error('Error:', error));
+  </script>
 </body>
-
 </html>
