@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { JSDOM } = require('jsdom');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,16 +11,14 @@ app.post('/bfhl', (req, res) => {
     try {
         const data = req.body.data;
 
-        const userId = "john_doe_17091999";
+        const userId = "Satwik_Dubey_30032003";
 
-        const email = "john@xyz.com";
-        const rollNumber = "ABCD123";
-
+        const email = "satwik1169.be21@chitkarauniversity.edu.in";
+        const rollNumber = "2111981169";
 
         let evenNumbers = [];
         let oddNumbers = [];
         let alphabets = [];
-
 
         data.forEach(item => {
             if (typeof item === 'number') {
@@ -35,22 +34,34 @@ app.post('/bfhl', (req, res) => {
             }
         });
 
-
         const response = {
             "is_success": true,
-            "user_id": Satwik_30032003,
-            "email": satwik1169.be21 @chitkarauniversity.edu.in,
-            "roll_number": 2111981169,
+            "user_id": userId,
+            "email": email,
+            "roll_number": rollNumber,
             "even_numbers": evenNumbers,
             "odd_numbers": oddNumbers,
             "alphabets": alphabets
         };
 
+        const html = `
+      <html>
+        <head>
+          <title>Response</title>
+        </head>
+        <body>
+          <h1>Response:</h1>
+          <pre>${JSON.stringify(response, null, 2)}</pre>
+        </body>
+      </html>
+    `;
 
-        res.json(response);
+
+        const dom = new JSDOM(html);
+        res.send(dom.window.document.documentElement.outerHTML);
     } catch (error) {
 
-        res.status(500).json({ "is_success": false, "error": error.message });
+        res.status(500).send(`<h1>Error: ${error.message}</h1>`);
     }
 });
 
