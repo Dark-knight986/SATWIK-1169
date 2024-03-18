@@ -23,9 +23,10 @@
         "data": ["a","1","334","4","R"]
       })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-      document.getElementById('response').innerText = data;
+      document.getElementById('request').innerText = 'Request\n' + JSON.stringify({"data": ["a","1","334","4","R"]}, null, 2);
+      document.getElementById('response').innerText = 'Response\n' + JSON.stringify(data, null, 2);
     })
     .catch(error => console.error('Error:', error));
   </script>
